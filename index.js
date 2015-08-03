@@ -9,8 +9,13 @@ module.exports = function (paths, cb) {
 		throw new Error('Windows only');
 	}
 
-	if (!(Array.isArray(paths) && paths.length > 0)) {
+	if (!Array.isArray(paths)) {
 		throw new Error('Please supply an array of filepaths');
+	}
+
+	if (paths.length === 0) {
+		setImmediate(cb);
+		return;
 	}
 
 	paths = paths.map(function (el) {
